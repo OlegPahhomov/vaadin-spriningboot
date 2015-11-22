@@ -14,12 +14,12 @@ public class Person {
     private String fullName;
     private String examName;
     private String examCode;
-    private int score;
+    private String score;
 
     public Person() {
     }
 
-    public Person(String fullName, String examName, String examCode, int score) {
+    public Person(String fullName, String examName, String examCode, String score) {
         this.fullName = fullName;
         this.examName = examName;
         this.examCode = examCode;
@@ -58,11 +58,11 @@ public class Person {
         this.examCode = examCode;
     }
 
-    public int getScore() {
+    public String getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(String score) {
         this.score = score;
     }
 
