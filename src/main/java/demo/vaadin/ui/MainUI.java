@@ -8,11 +8,8 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import demo.vaadin.db.Person;
-import demo.vaadin.db.PersonRepository;
+import demo.vaadin.db.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.vaadin.viritin.SortableLazyList;
 import org.vaadin.viritin.button.ConfirmButton;
 import org.vaadin.viritin.button.MButton;
 import org.vaadin.viritin.fields.MTable;
@@ -20,18 +17,19 @@ import org.vaadin.viritin.label.RichText;
 import org.vaadin.viritin.layouts.MHorizontalLayout;
 import org.vaadin.viritin.layouts.MVerticalLayout;
 
+import java.util.Collection;
+
 @Title("Certified personnel")
 @Theme("valo")
 @SpringUI
 public class MainUI extends UI {
-    private static final int PAGESIZE = 15;
     private static final long serialVersionUID = 1L;
     public static final String FULL_NAME = "fullName";
     public static final String EXAM_NAME = "examName";
     public static final String EXAM_CODE = "examCode";
     public static final String SCORE = "score";
     @Autowired
-    PersonRepository repo;
+    PersonService personService;
 
     private MTable<Person> people;
     private Button addNew;
@@ -62,49 +60,26 @@ public class MainUI extends UI {
         people.addMValueChangeListener(e -> adjustActionButtonState());
     }
 
-    protected void adjustActionButtonState() {
+    private void adjustActionButtonState() {
         boolean hasSelection = people.getValue() != null;
         edit.setEnabled(hasSelection);
         delete.setEnabled(hasSelection);
     }
 
     private void listEntities() {
-        people.setBeans(findAll());
+        people.setBeans(personService.findAll());
         adjustActionButtonState();
     }
 
-    private SortableLazyList<Object> findAll() {
-        return new SortableLazyList<>(
-                getSortablePagingProvider(),
-                () -> (int) repo.count(),
-                PAGESIZE
-        );
-    }
-
-    private SortableLazyList.SortablePagingProvider getSortablePagingProvider() {
-        return (firstRow, asc, sortProperty) -> repo.findAllBy(
-                new PageRequest(
-                        firstRow / PAGESIZE,
-                        PAGESIZE,
-                        asc ? Sort.Direction.ASC : Sort.Direction.DESC,
-                        sortProperty == null ? "id" : sortProperty));
-    }
-
-    public void add(Button.ClickEvent clickEvent) {
+    private void add(Button.ClickEvent e) {
         edit(new Person());
     }
 
-    public void edit(Button.ClickEvent e) {
+    private void edit(Button.ClickEvent e) {
         edit(people.getValue());
     }
 
-    public void remove(Button.ClickEvent e) {
-        repo.delete(people.getValue());
-        people.setValue(null);
-        listEntities();
-    }
-
-    protected void edit(final Person phoneBookEntry) {
+    private void edit(final Person phoneBookEntry) {
         PersonForm personForm = new PersonForm(phoneBookEntry);
         personForm.openInModalPopup();
         personForm.setSavedHandler(this::saveEntry);
@@ -112,9 +87,15 @@ public class MainUI extends UI {
     }
 
     public void saveEntry(Person entry) {
-        repo.save(entry);
+        personService.save(entry);
         listEntities();
         closeWindow();
+    }
+
+    public void remove(Button.ClickEvent e) {
+        personService.delete(people.getValue());
+        people.setValue(null);
+        listEntities();
     }
 
     public void resetEntry(Person entry) {
