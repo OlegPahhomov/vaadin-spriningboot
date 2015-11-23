@@ -9,6 +9,7 @@ import demo.vaadin.db.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.MapKeyEnumerated;
 
 @SpringView(name = DefaultView.VIEW_NAME)
 public class DefaultView extends VerticalLayout implements View {

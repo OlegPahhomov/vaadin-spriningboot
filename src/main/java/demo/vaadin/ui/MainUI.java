@@ -16,6 +16,7 @@ import org.vaadin.viritin.SortableLazyList;
 import org.vaadin.viritin.button.ConfirmButton;
 import org.vaadin.viritin.button.MButton;
 import org.vaadin.viritin.fields.MTable;
+import org.vaadin.viritin.label.RichText;
 import org.vaadin.viritin.layouts.MHorizontalLayout;
 import org.vaadin.viritin.layouts.MVerticalLayout;
 
@@ -25,24 +26,34 @@ import org.vaadin.viritin.layouts.MVerticalLayout;
 public class MainUI extends UI {
     private static final int PAGESIZE = 15;
     private static final long serialVersionUID = 1L;
-
+    public static final String FULL_NAME = "fullName";
+    public static final String EXAM_NAME = "examName";
+    public static final String EXAM_CODE = "examCode";
+    public static final String SCORE = "score";
     @Autowired
     PersonRepository repo;
 
-    private MTable<Person> people = new MTable<>(Person.class)
-            .withProperties("fullName", "examName", "examCode", "score")
-            .withColumnHeaders("Person name", "Name of the Exam", "Exam code", "Score")
-            .setSortableProperties("fullName", "examName", "examCode", "score")
-            .withFullWidth();
-    private Button addNew = new MButton(FontAwesome.PLUS, this::add);
-    private Button edit = new MButton(FontAwesome.PENCIL_SQUARE_O, this::edit);
-    private Button delete = new ConfirmButton(FontAwesome.TRASH_O, "Are you sure you want to delete the entry?", this::remove);
+    private MTable<Person> people;
+    private Button addNew;
+    private Button edit;
+    private Button delete;
+
+    public MainUI(){
+        this.people = new MTable<>(Person.class)
+                .withProperties(FULL_NAME, EXAM_NAME, EXAM_CODE, SCORE)
+                .withColumnHeaders("Person name", "Name of the Exam", "Exam code", "Score")
+                .setSortableProperties(FULL_NAME, EXAM_NAME, EXAM_CODE, SCORE)
+                .withFullWidth();
+        this.addNew = new MButton(FontAwesome.PLUS, this::add);
+        this.edit = new MButton(FontAwesome.PENCIL_SQUARE_O, this::edit);
+        this.delete = new ConfirmButton(FontAwesome.TRASH_O, "Are you sure you want to delete the entry?", this::remove);
+    }
 
     @Override
     protected void init(VaadinRequest request) {
         setContent(
                 new MVerticalLayout(
-                        //new RichText().withMarkDownResource("/welcome.md"),
+                        new RichText().withMarkDownResource("/welcome.md"),
                         new MHorizontalLayout(addNew, edit, delete),
                         people
                 ).expand(people)
