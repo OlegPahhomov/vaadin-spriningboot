@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Person {
@@ -11,9 +13,16 @@ public class Person {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
+    @NotNull(message = "Name is required")
+    @Size(min = 3, max = 40, message = "name must be longer than 3 and less than 40 characters")
     private String fullName;
+    @NotNull(message = "Exam name is required")
     private String examName;
+    @NotNull(message = "Enter code: xxx-zzz")
+    @Size(min = 7, max = 7)
     private String examCode;
+    @NotNull(message = "Score is required")
+    @Size(max = 3)
     private String score;
 
     public Person() {
