@@ -24,27 +24,15 @@ public class Application {
             repository.save(new Person("Oleg Pahhomov", "Java SE 8 Programmer I", "1Z0-808", "92"));
             repository.save(new Person("Pablo Veritas", "Java SE 7 Programmer I", "1Z0-803", "81"));
             repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
-            repository.save(new Person("Joonas Mathias", "Java SE 7 Programmer I", "1Z0-803", "96"));
+            repository.save(new Person("Mari Anniloo", "Java SE 7 Programmer I", "1Z0-803", "76"));
+            repository.save(new Person("Artur Rubijantsev", "Java SE 7 Programmer I", "1Z0-803", "79"));
+            repository.save(new Person("Isaac Walter", "Java SE 7 Programmer I", "1Z0-803", "89"));
+            repository.save(new Person("John Scott", "Java SE 7 Programmer I", "1Z0-803", "79"));
+            repository.save(new Person("Egle Tammert", "Java SE 7 Programmer I", "1Z0-803", "96"));
+            repository.save(new Person("Frank Bark", "Java SE 7 Programmer I", "1Z0-803", "96"));
+            repository.save(new Person("Maarika Tuli", "Java SE 7 Programmer I", "1Z0-803", "96"));
+            repository.save(new Person("Rasmus Armas", "Java SE 7 Programmer I", "1Z0-803", "96"));
+            repository.save(new Person("Peep Kivistik", "Java SE 7 Programmer I", "1Z0-803", "96"));
         };
     }
 }
