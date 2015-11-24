@@ -5,7 +5,7 @@ Certified personnel app with vaadin-springboot.
 Open in favorite IDE and run Application.java main method.
 Or mvn clean install spring-boot:run
 
-Runs or port 8080 or config in application.properties
+Runs on port 8080 or config it in application.properties
 
 
 I have some issues and things to do:
