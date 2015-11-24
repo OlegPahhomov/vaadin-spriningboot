@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
-    List<Person> findAll();
+    List<Person> findPeopleByOrderByScoreDesc();
 
-    @Query("SELECT p FROM Person p WHERE lower(p.fullName) LIKE %:searchTerm% ")
+    @Query("SELECT p FROM Person p WHERE lower(p.fullName) LIKE %:searchTerm% order by p.score desc ")
     List<Person> findAllByNameLike(@Param("searchTerm") String searchTerm);
 
 }

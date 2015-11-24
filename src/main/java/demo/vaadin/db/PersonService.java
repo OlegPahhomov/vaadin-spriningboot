@@ -13,7 +13,7 @@ public class PersonService {
     PersonRepository personRepo;
 
     public List<Person> findAll(String filter) {
-        if (StringUtils.isEmpty(filter)) personRepo.findAll();
+        if (StringUtils.isEmpty(filter)) personRepo.findPeopleByOrderByScoreDesc();
         return personRepo.findAllByNameLike(filter.toLowerCase());
     }
 

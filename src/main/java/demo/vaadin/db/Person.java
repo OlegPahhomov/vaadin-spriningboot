@@ -1,9 +1,12 @@
 package demo.vaadin.db;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -18,7 +21,7 @@ public class Person {
     private String fullName;
     @NotNull(message = "Exam name is required")
     private String examName;
-    @NotNull(message = "Enter code: xxx-zzz")
+    @NotNull(message = "Enter 7 symbol code: XXX-ZZZ")
     @Size(min = 7, max = 7)
     private String examCode;
     @NotNull(message = "Score is required")
