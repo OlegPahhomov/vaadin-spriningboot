@@ -13,11 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.viritin.button.ConfirmButton;
 import org.vaadin.viritin.button.MButton;
 import org.vaadin.viritin.fields.MTable;
+import org.vaadin.viritin.fields.MTextField;
 import org.vaadin.viritin.label.RichText;
 import org.vaadin.viritin.layouts.MHorizontalLayout;
 import org.vaadin.viritin.layouts.MVerticalLayout;
-
-import java.util.Collection;
 
 @Title("Certified personnel")
 @Theme("valo")
@@ -35,8 +34,10 @@ public class MainUI extends UI {
     private Button addNew;
     private Button edit;
     private Button delete;
+    private final TextField filter;
 
     public MainUI(){
+        this.filter = new MTextField().withInputPrompt("Filter by person name").withWidth(400f, Unit.PIXELS);
         this.people = new MTable<>(Person.class)
                 .withProperties(FULL_NAME, EXAM_NAME, EXAM_CODE, SCORE)
                 .withColumnHeaders("Person name", "Name of the Exam", "Exam code", "Score")
@@ -49,10 +50,11 @@ public class MainUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
+        filter.addTextChangeListener(e -> listEntities(e.getText()));
         setContent(
                 new MVerticalLayout(
                         new RichText().withMarkDownResource("/welcome.md"),
-                        new MHorizontalLayout(addNew, edit, delete),
+                        new MHorizontalLayout(addNew, edit, delete, filter),
                         people
                 ).expand(people)
         );
@@ -66,8 +68,13 @@ public class MainUI extends UI {
         delete.setEnabled(hasSelection);
     }
 
+    private void listEntities(String filter) {
+        people.setBeans(personService.findAll(filter));
+        adjustActionButtonState();
+    }
+
     private void listEntities() {
-        people.setBeans(personService.findAll());
+        people.setBeans(personService.findAll(filter.getValue()));
         adjustActionButtonState();
     }
 
